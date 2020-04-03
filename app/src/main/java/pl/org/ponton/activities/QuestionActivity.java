@@ -83,6 +83,10 @@ public class QuestionActivity extends AppCompatActivity {
                                 })
                                 .show();
                     }
+
+                    for (AnswerButton tempButton : buttonList) {
+                        tempButton.setClickable(false);
+                    }
                 }
             });
         }

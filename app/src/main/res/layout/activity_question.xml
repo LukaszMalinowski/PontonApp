@@ -7,10 +7,13 @@
     tools:context="pl.org.ponton.activities.QuestionActivity">
 
     <TextView
+        android:padding="10dp"
         android:id="@+id/questionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
         android:gravity="center"
         android:text="Pytanie"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,17 +21,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
-        android:layout_width="409dp"
-        android:layout_height="680dp"
+        android:id="@+id/tableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="49dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="match_parent">
 
             <pl.org.ponton.questions.AnswerButton
                 android:id="@+id/buttonA"
