@@ -3,7 +3,10 @@ package pl.org.ponton.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,40 @@ public class QuestionActivity extends AppCompatActivity {
         initButtons();
 
         initQuestionText();
+
+        addButtonListners();
+    }
+
+    private void addButtonListners() {
+        for (final AnswerButton button : buttonList) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(button.isCorrect()) {
+                        Snackbar.make(v, "Odpowiedź prawidłowa.", Snackbar.LENGTH_INDEFINITE)
+                                .setAction("kliknij tu", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                })
+                                .show();
+                    }
+                    else {
+                        Snackbar.make(v, "Odpowiedź nieprawidłowa.", Snackbar.LENGTH_INDEFINITE)
+                                .setAction("kliknij tu", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                })
+                                .show();
+                    }
+                }
+            });
+        }
     }
 
     private void initQuestionText() {
