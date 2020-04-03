@@ -2,6 +2,7 @@ package pl.org.ponton.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -34,12 +35,20 @@ public class QuestionActivity extends AppCompatActivity {
 
         level1 = Level1.getInstance();
 
+        System.out.println(level1);
+
         try {
             question = level1.getQuestion();
         } catch (Exception e) {
-            e.printStackTrace();
+            Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+            QuestionActivity.this.startActivity(intent);
+            finish();
         }
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         initButtons();
 
         initQuestionText();

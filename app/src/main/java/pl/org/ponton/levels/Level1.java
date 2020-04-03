@@ -34,7 +34,7 @@ public class Level1 {
     }
 
     public QuestionWrapper getQuestion() throws Exception{
-        if(questions.isEmpty())
+        if(questions == null || questions.isEmpty())
             throw new Exception("Brak pytań");
 
         int randIndex = random.nextInt(questions.size());
