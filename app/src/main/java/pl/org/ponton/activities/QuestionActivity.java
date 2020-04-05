@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import pl.org.ponton.user.User;
 import pl.ponton.R;
 import pl.org.ponton.levels.Level;
 import pl.org.ponton.questions.AnswerButton;
@@ -62,6 +63,7 @@ public class QuestionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(button.isCorrect()) {
+                        User.getUser().setScore(User.getUser().getScore() + 100);
                         Snackbar.make(v, "Odpowiedź prawidłowa.", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("kliknij tu", new View.OnClickListener() {
                                     @Override
@@ -73,6 +75,7 @@ public class QuestionActivity extends AppCompatActivity {
                                 .show();
                     }
                     else {
+                        User.getUser().setScore(User.getUser().getScore() - 100);
                         Snackbar.make(v, "Odpowiedź nieprawidłowa.", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("kliknij tu", new View.OnClickListener() {
                                     @Override
