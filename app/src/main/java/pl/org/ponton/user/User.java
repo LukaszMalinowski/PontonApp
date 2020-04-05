@@ -2,7 +2,7 @@ package pl.org.ponton.user;
 
 public class User {
 
-    private static User object;
+    private static User user;
 
     private int score;
 
@@ -16,10 +16,14 @@ public class User {
 
     public static User loadUser() {
         //TODO wczytaj usera z pliku czy czegos tam
-        if(object == null)
-            object = new User();
+        if(user == null)
+            user = new User();
 
-        return object;
+        return user;
+    }
+
+    public static User getUser() {
+        return user;
     }
 
     public int getScore() {

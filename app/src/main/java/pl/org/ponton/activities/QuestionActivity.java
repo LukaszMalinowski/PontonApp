@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import pl.ponton.R;
-import pl.org.ponton.levels.Level1;
+import pl.org.ponton.levels.Level;
 import pl.org.ponton.questions.AnswerButton;
 import pl.org.ponton.questions.QuestionWrapper;
 
@@ -22,7 +22,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private List<AnswerButton> buttonList;
 
-    private Level1 level1;
+    private Level level;
 
     private QuestionWrapper question;
 
@@ -33,14 +33,14 @@ public class QuestionActivity extends AppCompatActivity {
 
         buttonList = new ArrayList<>();
 
-        level1 = Level1.getInstance();
+        level = Level.getInstance();
 
-        System.out.println(level1);
+        System.out.println(level);
 
         try {
-            question = level1.getQuestion();
+            question = level.getQuestion();
         } catch (Exception e) {
-            Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+            Intent intent = new Intent(QuestionActivity.this, SelectLevelActivity.class);
             QuestionActivity.this.startActivity(intent);
             finish();
         }
