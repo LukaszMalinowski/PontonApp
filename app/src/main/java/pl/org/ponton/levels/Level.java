@@ -52,12 +52,12 @@ public class Level {
         questions = new ArrayList<>();
         questions.add(new QuestionWrapper("1 + 1 = ?",
                 Arrays.asList("F3","F11","T2","F0")));
-//        questions.add(new QuestionWrapper("Które z miast jest stolicą Polski?",
-//                Arrays.asList("FKraków","TWarszawa","FWrocław","FGniezno")));
-//        questions.add(new QuestionWrapper("Dokończ zdanie: \"Mamy tradycję...\"",
-//                Arrays.asList("FKochać Policję","FLubię delicje","FJeść pizzę","TJebać Policję")));
-//        questions.add(new QuestionWrapper("Dokończ zdanie: \"To niespotykane, każdy chciałby mnie dla siebie, a ja wolę...\"",
-//                Arrays.asList("FMoją mamę","FMonogamię","FJeść Komara","TPoligamię")));
+        questions.add(new QuestionWrapper("Które z miast jest stolicą Polski?",
+                Arrays.asList("FKraków","TWarszawa","FWrocław","FGniezno")));
+        questions.add(new QuestionWrapper("Dokończ zdanie: \"Mamy tradycję...\"",
+                Arrays.asList("FKochać Policję","FLubię delicje","FJeść pizzę","TJebać Policję")));
+        questions.add(new QuestionWrapper("Dokończ zdanie: \"To niespotykane, każdy chciałby mnie dla siebie, a ja wolę...\"",
+                Arrays.asList("FMoją mamę","FMonogamię","FJeść Komara","TPoligamię")));
     }
 
     public QuestionWrapper getQuestion() throws Exception{

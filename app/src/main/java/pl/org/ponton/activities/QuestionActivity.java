@@ -41,9 +41,7 @@ public class QuestionActivity extends AppCompatActivity {
         try {
             question = level.getQuestion();
         } catch (Exception e) {
-            Intent intent = new Intent(QuestionActivity.this, SelectLevelActivity.class);
-            QuestionActivity.this.startActivity(intent);
-            finish();
+            onBackPressed();
         }
     }
 
@@ -139,5 +137,12 @@ public class QuestionActivity extends AppCompatActivity {
 
             button.setText(answer);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(QuestionActivity.this, SelectLevelActivity.class);
+        QuestionActivity.this.startActivity(intent);
+        finish();
     }
 }
