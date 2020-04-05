@@ -2,7 +2,9 @@ package pl.org.ponton.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,11 @@ import pl.org.ponton.user.User;
 import pl.ponton.R;
 
 public class SelectLevelActivity extends AppCompatActivity {
+    private static final String PREFERENCES_NAME = "settingsPreferences";
+
+    private SharedPreferences preferences;
+
+    private SharedPreferences.Editor editor;
 
     private Button level1Button;
 
@@ -28,6 +35,16 @@ public class SelectLevelActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_level);
+
+        Context context = getApplicationContext();
+
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+
+        editor = preferences.edit();
+
+        editor.putInt("score", User.getUser().getScore());
+
+        editor.commit();
 
         initScoreText();
 
