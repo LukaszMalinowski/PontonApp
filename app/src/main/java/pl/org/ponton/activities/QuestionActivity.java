@@ -2,7 +2,9 @@ package pl.org.ponton.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +22,11 @@ import pl.org.ponton.questions.AnswerButton;
 import pl.org.ponton.questions.QuestionWrapper;
 
 public class QuestionActivity extends AppCompatActivity {
+    private static final String PREFERENCES_NAME = "settingsPreferences";
+
+    private SharedPreferences preferences;
+
+    private SharedPreferences.Editor editor;
 
     private List<AnswerButton> buttonList;
 
@@ -32,6 +39,12 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        Context context = getApplicationContext();
+
+        preferences = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+
+        editor = preferences.edit();
+
         buttonList = new ArrayList<>();
 
         level = Level.getInstance();
@@ -41,8 +54,9 @@ public class QuestionActivity extends AppCompatActivity {
         try {
             question = level.getQuestion();
         } catch (Exception e) {
+            editor.putInt("score", User.getUser().getScore());
+            editor.commit();
             onBackPressed();
-            //TODO save user score to SharedPreferences
         }
     }
 

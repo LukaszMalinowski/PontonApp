@@ -19,8 +19,6 @@ public class SelectLevelActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
 
-    private SharedPreferences.Editor editor;
-
     private Button level1Button;
 
     private Button level2Button;
@@ -40,11 +38,7 @@ public class SelectLevelActivity extends AppCompatActivity {
 
         preferences = context.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
 
-        editor = preferences.edit();
-
-        editor.putInt("score", User.getUser().getScore());
-
-        editor.commit();
+        User.loadUser(preferences.getInt("score", 0));
 
         initScoreText();
 
