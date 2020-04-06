@@ -29,6 +29,10 @@ public class SelectLevelActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    private TextView level2Text;
+
+    private TextView level3Text;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class SelectLevelActivity extends AppCompatActivity {
         initScoreText();
 
         initButtons();
+
+        initScoreLeftText();
 
         scoreTextView.setText("Wynik: " + User.getUser().getScore());
 
@@ -79,12 +85,21 @@ public class SelectLevelActivity extends AppCompatActivity {
             }
         });
 
-        if (User.getUser().getScore() < 400)
+        if (User.getUser().getScore() < 400) {
             level2Button.setClickable(false);
+            level2Text.setText("Poziom zablokowany. Brakuje " + (400 - User.getUser().getScore()) + " punktów");
+        }
 
 
-        if (User.getUser().getScore() < 800)
+        if (User.getUser().getScore() < 800) {
             level3Button.setClickable(false);
+            level3Text.setText("Poziom zablokowany. Brakuje " + (800 - User.getUser().getScore()) + " punktów");
+        }
+    }
+
+    private void initScoreLeftText() {
+        level2Text = findViewById(R.id.level2Text);
+        level3Text = findViewById(R.id.level3Text);
     }
 
     private void initScoreText() {
