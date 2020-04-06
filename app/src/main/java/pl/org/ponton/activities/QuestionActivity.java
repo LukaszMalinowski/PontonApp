@@ -42,6 +42,7 @@ public class QuestionActivity extends AppCompatActivity {
             question = level.getQuestion();
         } catch (Exception e) {
             onBackPressed();
+            //TODO save user score to SharedPreferences
         }
     }
 

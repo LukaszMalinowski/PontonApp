@@ -40,11 +40,27 @@ public class Level {
     }
 
     private void loadLevel3() {
-        System.out.println("NOT IMPLEMENTED YET");
+        questions = new ArrayList<>();
+        questions.add(new QuestionWrapper("Jak nazywa się obecny prezydent Polski?",
+                Arrays.asList("TAndrzej Duda","FAdrian Dupa","FBronisław Komorowski","FJarosław Kaczyński")));
+        questions.add(new QuestionWrapper("Najlepszy energetyk to - ",
+                Arrays.asList("TMonster","FTiger","FBlack","FBurn")));
+        questions.add(new QuestionWrapper("Kto jest dyrektorem artystycznym Teatru Muzycznego Roma?",
+                Arrays.asList("TWojciech Kępczyński","FSebastian Gonciarz","FEwa Bara","FEwelina Kulawiuk")));
+        questions.add(new QuestionWrapper("Do których z poniższych teamów NIE należał Dylan Rieder?",
+                Arrays.asList("TNike SB","FHuf","FFucking Awesome","FSpitfire")));
     }
 
     private void loadLevel2() {
-        System.out.println("NOT IMPLEMENTED YET");
+        questions = new ArrayList<>();
+        questions.add(new QuestionWrapper("2 * 2 = ?",
+                Arrays.asList("F1","F6","T4","F22")));
+        questions.add(new QuestionWrapper("Wonsz żeczny -",
+                Arrays.asList("FW kolory tęczy","TJest niebezpieczny","FJest bardzo beczny","FMa ząbek mleczny")));
+        questions.add(new QuestionWrapper("Nie będziemy tu wpierdalać z jednej wazy -",
+                Arrays.asList("FBo szanujesz płazy","FZjadłbym sobie zrazy","FPotrzebuję metrowej gazy","TBo nie czaisz bazy")));
+        questions.add(new QuestionWrapper("Jak nazywała się postać grana w spektaklu \"Piloci\" przez Zofię Nowakowską?",
+                Arrays.asList("FBasia","FZofia","FGrażyna","TNina")));
     }
 
     private void loadLevel1() {

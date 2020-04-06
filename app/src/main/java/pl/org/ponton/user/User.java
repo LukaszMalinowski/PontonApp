@@ -14,16 +14,10 @@ public class User {
         this.score = score;
     }
 
-//    public static User loadUser() {
-//        if(user == null)
-//            user = new User();
-//
-//        return user;
-//    }
-
     public static User loadUser(int score) {
         if(user == null)
             user = new User(score);
+
 
         return user;
     }

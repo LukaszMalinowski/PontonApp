@@ -85,8 +85,12 @@ public class SelectLevelActivity extends AppCompatActivity {
             }
         });
 
-        level2Button.setClickable(false);
-        level3Button.setClickable(false);
+        if (User.getUser().getScore() < 400)
+            level2Button.setClickable(false);
+
+
+        if (User.getUser().getScore() < 800)
+            level3Button.setClickable(false);
     }
 
     private void initScoreText() {
