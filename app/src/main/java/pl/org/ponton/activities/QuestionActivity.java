@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -15,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import pl.org.ponton.exceptions.NoMoreQuestionsException;
+import pl.org.ponton.exceptions.NoMoreWrongQuestionsException;
 import pl.org.ponton.user.User;
 import pl.ponton.R;
 import pl.org.ponton.levels.Level;
@@ -34,6 +39,10 @@ public class QuestionActivity extends AppCompatActivity {
 
     private QuestionWrapper question;
 
+    private Button confirmButton;
+
+    private boolean addQuestions = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +56,77 @@ public class QuestionActivity extends AppCompatActivity {
 
         buttonList = new ArrayList<>();
 
-        level = Level.getInstance();
+        confirmButton = findViewById(R.id.confirmButton);
 
-        System.out.println(level);
+        confirmButton.setVisibility(View.INVISIBLE);
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmActionHandler(v);
+            }
+        });
+
+        level = Level.getInstance();
 
         try {
             question = level.getQuestion();
-        } catch (Exception e) {
-            editor.putInt("score", User.getUser().getScore());
-            editor.commit();
-            onBackPressed();
+        } catch (NoMoreQuestionsException e) {
+            try {
+                addQuestions = false;
+                question = level.getWrongQuestions();
+            } catch (NoMoreWrongQuestionsException ex) {
+                editor.putInt("score", User.getUser().getScore());
+                editor.commit();
+                onBackPressed();
+            }
         }
+    }
+
+    private void confirmActionHandler(View v) {
+        for (AnswerButton button : buttonList) {
+            confirmButton.setClickable(false);
+
+            for (AnswerButton tempButton : buttonList) {
+                tempButton.setClickable(false);
+
+                if(button.isCorrect())
+                    button.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
+            }
+
+            if(!button.isChecked())
+                continue;
+
+            if(button.isCorrect()) {
+                User.getUser().setScore(User.getUser().getScore() + 100);
+                Snackbar.make(v, "Odpowiedź prawidłowa.", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("dalej", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        })
+                        .show();
+            }
+            else {
+//                User.getUser().setScore(User.getUser().getScore() - 100);
+                button.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                if(addQuestions)
+                    level.addWrongQuestion(question);
+                Snackbar.make(v, "Odpowiedź nieprawidłowa.", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("dalej", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        })
+                        .show();
+            }
+
+        }
+
     }
 
     @Override
@@ -67,42 +136,21 @@ public class QuestionActivity extends AppCompatActivity {
 
         initQuestionText();
 
-        addButtonListners();
+        addButtonListeners();
     }
 
-    private void addButtonListners() {
+    private void addButtonListeners() {
         for (final AnswerButton button : buttonList) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(button.isCorrect()) {
-                        User.getUser().setScore(User.getUser().getScore() + 100);
-                        Snackbar.make(v, "Odpowiedź prawidłowa.", Snackbar.LENGTH_INDEFINITE)
-                                .setAction("kliknij tu", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        finish();
-                                        startActivity(getIntent());
-                                    }
-                                })
-                                .show();
-                    }
-                    else {
-                        User.getUser().setScore(User.getUser().getScore() - 100);
-                        Snackbar.make(v, "Odpowiedź nieprawidłowa.", Snackbar.LENGTH_INDEFINITE)
-                                .setAction("kliknij tu", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        finish();
-                                        startActivity(getIntent());
-                                    }
-                                })
-                                .show();
-                    }
-
                     for (AnswerButton tempButton : buttonList) {
-                        tempButton.setClickable(false);
+                        tempButton.setChecked(false);
+                        tempButton.getBackground().clearColorFilter();
                     }
+                    button.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                    button.setChecked(true);
+                    confirmButton.setVisibility(View.VISIBLE);
                 }
             });
         }

@@ -7,6 +7,8 @@ public class AnswerButton extends androidx.appcompat.widget.AppCompatButton {
 
     private boolean isCorrect = false;
 
+    private boolean isChecked = false;
+
     public AnswerButton(Context context) {
         super(context);
     }
@@ -17,6 +19,14 @@ public class AnswerButton extends androidx.appcompat.widget.AppCompatButton {
 
     public AnswerButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public boolean isCorrect() {

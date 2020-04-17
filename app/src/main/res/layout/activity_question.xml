@@ -4,74 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="pl.org.ponton.activities.QuestionActivity">
 
-    <TextView
-        android:padding="10dp"
-        android:id="@+id/questionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="center"
-        android:text="Pytanie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Pytanie" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="49dp">
+        android:orientation="vertical">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
-            <pl.org.ponton.questions.AnswerButton
-                android:id="@+id/buttonA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="120dp"
-                android:height="120dp"
-                android:text="A" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <pl.org.ponton.questions.AnswerButton
-                android:id="@+id/buttonB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="120dp"
-                android:height="120dp"
-                android:text="B" />
-        </TableRow>
+                <pl.org.ponton.questions.AnswerButton
+                    android:id="@+id/buttonA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="120dp"
+                    android:height="120dp"
+                    android:text="A" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+                <pl.org.ponton.questions.AnswerButton
+                    android:id="@+id/buttonB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="120dp"
+                    android:height="120dp"
+                    android:text="B" />
+            </TableRow>
 
-            <pl.org.ponton.questions.AnswerButton
-                android:id="@+id/buttonC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="120dp"
-                android:height="120dp"
-                android:text="C" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-            <pl.org.ponton.questions.AnswerButton
-                android:id="@+id/buttonD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="120dp"
-                android:height="120dp"
-                android:text="D" />
-        </TableRow>
+                <pl.org.ponton.questions.AnswerButton
+                    android:id="@+id/buttonC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="120dp"
+                    android:height="120dp"
+                    android:text="C" />
 
-    </TableLayout>
+                <pl.org.ponton.questions.AnswerButton
+                    android:id="@+id/buttonD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="120dp"
+                    android:height="120dp"
+                    android:text="D" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom | center"
+        android:layout_marginBottom="70dp">
+
+        <Button
+            android:id="@+id/confirmButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zatwierdź"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

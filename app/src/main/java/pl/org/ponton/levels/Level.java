@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import pl.org.ponton.exceptions.NoMoreQuestionsException;
+import pl.org.ponton.exceptions.NoMoreWrongQuestionsException;
 import pl.org.ponton.questions.QuestionWrapper;
 
 public class Level {
@@ -16,6 +18,8 @@ public class Level {
     public enum LevelType {LEVEL1, LEVEL2, LEVEL3}
 
     private List<QuestionWrapper> questions;
+
+    private List<QuestionWrapper> wrongQuestions;
 
     private Level() {
         random = new Random();
@@ -41,6 +45,8 @@ public class Level {
 
     private void loadLevel3() {
         questions = new ArrayList<>();
+        wrongQuestions = new ArrayList<>();
+
         questions.add(new QuestionWrapper("Jak nazywa się obecny prezydent Polski?",
                 Arrays.asList("TAndrzej Duda","FAdrian Dupa","FBronisław Komorowski","FJarosław Kaczyński")));
         questions.add(new QuestionWrapper("Najlepszy energetyk to - ",
@@ -53,6 +59,8 @@ public class Level {
 
     private void loadLevel2() {
         questions = new ArrayList<>();
+        wrongQuestions = new ArrayList<>();
+
         questions.add(new QuestionWrapper("2 * 2 = ?",
                 Arrays.asList("F1","F6","T4","F22")));
         questions.add(new QuestionWrapper("Wonsz żeczny -",
@@ -64,8 +72,9 @@ public class Level {
     }
 
     private void loadLevel1() {
-        //TODO ladowanie z pliku
         questions = new ArrayList<>();
+        wrongQuestions = new ArrayList<>();
+
         questions.add(new QuestionWrapper("1 + 1 = ?",
                 Arrays.asList("F3","F11","T2","F0")));
         questions.add(new QuestionWrapper("Które z miast jest stolicą Polski?",
@@ -76,9 +85,9 @@ public class Level {
                 Arrays.asList("FMoją mamę","FMonogamię","FJeść Komara","TPoligamię")));
     }
 
-    public QuestionWrapper getQuestion() throws Exception{
+    public QuestionWrapper getQuestion() throws NoMoreQuestionsException {
         if(questions == null || questions.isEmpty())
-            throw new Exception("Brak pytań");
+            throw new NoMoreQuestionsException("Brak pytań");
 
         int randIndex = random.nextInt(questions.size());
 
@@ -87,5 +96,22 @@ public class Level {
         questions.remove(randIndex);
 
         return questionWrapper;
+    }
+
+    public QuestionWrapper getWrongQuestions() throws NoMoreWrongQuestionsException {
+        if(wrongQuestions == null || wrongQuestions.isEmpty())
+            throw new NoMoreWrongQuestionsException("Brak pytań");
+
+        int randIndex = random.nextInt(wrongQuestions.size());
+
+        QuestionWrapper questionWrapper = wrongQuestions.get(randIndex);
+
+        wrongQuestions.remove(randIndex);
+
+        return questionWrapper;
+    }
+
+    public void addWrongQuestion(QuestionWrapper question) {
+        wrongQuestions.add(question);
     }
 }

@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
+import java.io.File;
+
 import pl.org.ponton.levels.Level;
 import pl.org.ponton.user.User;
 import pl.ponton.R;
@@ -24,6 +27,9 @@ public class SelectLevelActivity extends AppCompatActivity {
     private Button level2Button;
 
     private Button level3Button;
+
+    //DEV ONLY
+    private Button resetButton;
 
     private TextView scoreTextView;
 
@@ -45,6 +51,9 @@ public class SelectLevelActivity extends AppCompatActivity {
         User.loadUser(preferences.getInt("score", 0));
 
         initScoreText();
+
+        //DEV ONLY
+        initResetButton();
 
         initButtons();
 
@@ -85,6 +94,10 @@ public class SelectLevelActivity extends AppCompatActivity {
             }
         });
 
+        lockButtons();
+    }
+
+    private void lockButtons() {
         if (User.getUser().getScore() < 400) {
             level2Button.setClickable(false);
             level2Text.setText("Poziom zablokowany. Brakuje " + (400 - User.getUser().getScore()) + " punktów");
@@ -95,6 +108,18 @@ public class SelectLevelActivity extends AppCompatActivity {
             level3Button.setClickable(false);
             level3Text.setText("Poziom zablokowany. Brakuje " + (800 - User.getUser().getScore()) + " punktów");
         }
+    }
+
+    private void initResetButton() {
+        resetButton = findViewById(R.id.reset);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User.getUser().setScore(0);
+                scoreTextView.setText("Wynik: " + User.getUser().getScore());
+                lockButtons();
+            }
+        });
     }
 
     private void initScoreLeftText() {
